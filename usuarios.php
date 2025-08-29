@@ -40,8 +40,10 @@ $i=1;
         <th>N°</th>
         <th>Usuario</th>
         <th>Correo</th>
-        <th>Password</th>
         <th>Acción</th>
+        <th></th>
+        <th></th>
+        <th>Admin Contraseña</th>
     </tr>
         <?php
         while($lista= mysqli_fetch_array($ejecutar_consulta)){
@@ -50,10 +52,16 @@ $i=1;
         <td><?php echo $i++ ?></td>
         <td><?php echo $lista['usuario'] ?></td>
         <td><?php echo $lista['email'] ?></td>
-        <td><?php echo $lista['pwd'] ?></td>
-        <td><button class="btn btn-primary" value="Editar">Editar</button> 
-        | <button class="btn btn-danger" value="Eliminar">Eliminar</button>
-      </td>
+        <td><a href="editar-usuario.php?id=<?php echo $lista['id'] ?>" class="btn btn-primary" value="Editar">Editar</a> 
+        </td>  
+        <td><form action="eliminar-usuario.php" method="POST"> 
+            <input type="hidden" name="id" value="<?php echo $lista['id'] ?>">
+        <button  class="btn btn-danger" >Eliminar</button>
+        </form>
+        <td> 
+            <td>
+                <button class="btn btn-warning" value="Eliminar" title="Modificar contraseña">Contraseña</button>
+           </td>
      </tr>
     <?php
       }
