@@ -4,8 +4,12 @@ if(isset($_SESSION['usuario'])== null){
     Header('Location: index.php');
 }
 include_once('./conf/conf.php');
-$nombre=isset($_POST['usuario']) ? $_POST['usuario']:"";
-$usuario=isset($_POST['correo']) ? $_POST['correo']:"";
+$nombre=isset($_GET['usuario']) ? $_GET['usuario']:"";
+$usuario=isset($_GET['correo']) ? $_GET['correo']:"";
+$error=isset($_GET['error']) ? $_GET['error']:"";
+if($error==1){
+     echo "<script>alert('El nombre de usuario ya existe pruebe con otro')</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +30,8 @@ $usuario=isset($_POST['correo']) ? $_POST['correo']:"";
         include_once('nav.php')
     ?>
 <div class="contenido">
-    <form action="" method="POST" class="form-control">
+    <form action="crud-usuarios.php" method="POST" class="form-control">
+    <input type="hidden" name="bandera" value="1">
     <label for="usuario" class="form-label">Usuario</label>
     <input type="text" name="usuario" id="usuario" class="form-control" required placeholder="Ingrese su nombre de usuario" value="<?php echo $nombre ?>">
 
@@ -42,28 +47,6 @@ $usuario=isset($_POST['correo']) ? $_POST['correo']:"";
 </body>
 </html>
 <?php
-if($_SERVER['REQUEST_METHOD']=='POST')
-{
-    $nombre=isset($_POST['usuario']) ? $_POST['usuario']:"";
-    $usuario=isset($_POST['correo']) ? $_POST['correo']:"";
-    $pwd=isset($_POST['pwd']) ? $_POST['pwd']:"";
-    $passformat=MD5($pwd);
 
-    $vericar_nombre="SELECT * from usuario WHERE usuario='$nombre'";
-    $verificar_sql= mysqli_query($con, $vericar_nombre);
-    if(mysqli_num_rows($verificar_sql)>=1){
-        echo "<script>alert('El nombre de usuario ya existe pruebe con otro')</script>";
-    }else {
-        $insertar= "INSERT INTO usuario (id, usuario, email,pwd) VALUES 
-        (NULL, '$nombre', '$usuario','$passformat')";
-        $ejecucion= mysqli_query($con, $insertar);
-            if($ejecucion){
-            header('Location: usuarios.php');
-            }else{
-            header('Location: agregar-usuario.php');
-            }
-    }
-
-}
 
 ?>

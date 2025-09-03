@@ -54,7 +54,8 @@ $i=1;
         <td><?php echo $lista['email'] ?></td>
         <td><a href="editar-usuario.php?id=<?php echo $lista['id'] ?>" class="btn btn-primary" value="Editar">Editar</a> 
         </td>  
-        <td><form action="eliminar-usuario.php" method="POST"> 
+        <td><form action="crud-usuarios.php" method="POST"> 
+            <input type="hidden" name="bandera" value="3">
             <input type="hidden" name="id" value="<?php echo $lista['id'] ?>">
         <button  class="btn btn-danger" >Eliminar</button>
         </form>
