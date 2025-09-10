@@ -11,6 +11,9 @@
       <li class="nav-item">
          <a class="nav-link" style="color:white" href="usuarios.php">Usuarios</a>
       </li>
+       <li class="nav-item">
+         <a class="nav-link" style="color:white" href="personas.php">Personas</a>
+      </li>
       
       <li class="nav-item">
          <a class="nav-link" style="color:white" href="salir.php">Cerrar Sessión</a>
